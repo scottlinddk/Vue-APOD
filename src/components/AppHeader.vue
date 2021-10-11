@@ -1,5 +1,14 @@
 <template>
   <div class="hello">
+    <!-- 
+      !! REMEMBER .ENV 😊
+      1. Use fetch or AXIOS to fetch NASA API
+      2. Check format 
+      3. Check 'media type' from the API
+      4. Render either Photo.vue or Video.vue depending on the media type
+      5.  
+    
+     -->
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -35,6 +44,17 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  }, 
+  data() {
+    return {
+      apod
+    }
+  },
+  methods: {
+      getList() {
+        this.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
   }
 }
 </script>

@@ -1,16 +1,28 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Hello"/>
+  <AppHeader msg="Hello"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppHeader from './components/AppHeader.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppHeader
+  },
+  data() {
+    return {
+      apod
+    }
+  },
+  methods: {
+      getList() {
+        this.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
   }
+}
 }
 </script>
 
