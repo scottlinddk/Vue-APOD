@@ -1,28 +1,52 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <AppHeader msg="Hello"/>
-</template>
+  <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
+  <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
 
+  <!-- <div>{{ apod }}</div> -->
+  <div v-if="errors > 0">Something went wrong 😔 Try and reload the page.</div>
+</template>
+    <!-- 
+      !! REMEMBER .ENV 😊
+      1. Use fetch or AXIOS to fetch NASA API
+      2. Check format 
+      3. Check 'media type' from the API
+      4. Render either Photo.vue or Video.vue depending on the media type
+      5.  
+    
+     -->
 <script>
-import AppHeader from './components/AppHeader.vue'
+require("dotenv").config();
+import axios from 'axios';
+
+import AppVideo from './components/AppVideo.vue'
+import AppPhoto from './components/AppPhoto.vue'
 
 export default {
   name: 'App',
   components: {
-    AppHeader
+    AppVideo,
+    AppPhoto
   },
   data() {
     return {
-      apod
+      apod: null,
+      api: 'https://api.nasa.gov/planetary/apod?api_key=',
+      key: process.env.VUE_APP_API_KEY,
+      errors: [],
+      mediaType: null,
     }
   },
-  methods: {
-      getList() {
-        this.axios.get(api).then((response) => {
-        console.log(response.data)
-      })
+  async mounted () {
+    try {
+      const response = await axios.get('https://api.nasa.gov/planetary/apod?api_key=' + this.key)
+      this.apod = response.data
+      this.mediaType = response.data.media_type
+      console.log(this.apod.media_type)
+    } catch (e) {
+      this.errors.push(e)
+    }
   }
-}
 }
 </script>
 
