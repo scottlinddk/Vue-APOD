@@ -1,7 +1,6 @@
 <template>
   <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
-  <AppModal />
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
     <!-- 
@@ -10,7 +9,8 @@
       2. Check format 
       3. Check 'media type' from the API
       4. Render either Photo.vue or Video.vue depending on the media type
-      5. Get yesterdays APOD (maybe)
+      5. Error handling
+      6. Get yesterdays APOD (maybe) 
     
      -->
 <script>
@@ -18,14 +18,12 @@ import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
 import AppPhoto from './components/AppPhoto.vue'
-import AppModal from './components/AppModal.vue'
 
 export default {
   name: 'App',
   components: {
     AppVideo,
     AppPhoto,
-    AppModal
   },
   data() {
     return {

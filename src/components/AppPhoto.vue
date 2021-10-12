@@ -10,16 +10,22 @@
         <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
         <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
       </div> -->
+      <AppModal :apod-data-obj="apod"/>
     </div>
   </div>
 </section>
-{{ apod.url }}
-  <p>{{ apod }}</p>
+<!-- {{ apod.url }}
+  <p>{{ apod }}</p> -->
 </template>
 
 <script>
+import AppModal from './AppModal.vue'
+
 export default {
   name: 'AppPhoto',
+  components: {
+    AppModal
+  },
   props: {
     apodDataObj: {
       type: Object,
