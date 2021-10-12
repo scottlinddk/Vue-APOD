@@ -1,19 +1,19 @@
 <template>
   <div>
-    <button class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
+    <button class="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
       View high resolution image
     </button>
-    <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div v-if="showModal" class="h-screen p-5 overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
       <div class="relative w-auto my-6 mx-auto max-w-6xl">
         <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
           <!--header-->
-          <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-            <h3 class="text-3xl font-semibold">
+          <div class="flex items-start justify-between p-3 border-b border-solid border-gray-200 rounded-t">
+            <!-- <h3 class="text-3xl font-semibold">
               Modal Title
-            </h3>
-            <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" v-on:click="toggleModal()">
-              <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                ×
+            </h3> -->
+            <button class="p-1 ml-auto bg-transparent border-0 text-red opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" v-on:click="toggleModal()">
+              <span class="text-red text-3xl block outline-red focus:outline-red">
+                Close
               </span>
             </button>
           </div>
@@ -22,14 +22,11 @@
             <img class="" alt="hero" :src="apodDataObj.hdurl">
           </div>
           <!--footer-->
-          <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+          <!-- <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
             <button class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
               Close
             </button>
-            <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" v-on:click="toggleModal()">
-              Save Changes
-            </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -59,3 +56,9 @@ export default {
   }
 }
 </script>
+
+<style>
+span {
+    color: black;
+}
+</style>
