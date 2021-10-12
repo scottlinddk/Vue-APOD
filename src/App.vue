@@ -1,7 +1,7 @@
 <template>
   <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
-
+  <AppModal />
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
     <!-- 
@@ -18,12 +18,14 @@ import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
 import AppPhoto from './components/AppPhoto.vue'
+import AppModal from './components/AppModal.vue'
 
 export default {
   name: 'App',
   components: {
     AppVideo,
-    AppPhoto
+    AppPhoto,
+    AppModal
   },
   data() {
     return {
