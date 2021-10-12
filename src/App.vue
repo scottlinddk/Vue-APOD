@@ -1,10 +1,8 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
   <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
 
-  <!-- <div>{{ apod }}</div> -->
-  <div v-if="errors > 0">Something went wrong 😔 Try and reload the page.</div>
+  <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
     <!-- 
       !! REMEMBER .ENV 😊
@@ -12,11 +10,10 @@
       2. Check format 
       3. Check 'media type' from the API
       4. Render either Photo.vue or Video.vue depending on the media type
-      5.  
+      5. Get yesterdays APOD (maybe)
     
      -->
 <script>
-require("dotenv").config();
 import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
