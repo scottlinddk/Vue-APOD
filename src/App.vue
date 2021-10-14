@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      apod: null,
+      apod: {},
       api: 'https://api.nasa.gov/planetary/apod?api_key=',
       key: process.env.VUE_APP_API_KEY,
       errors: [],
