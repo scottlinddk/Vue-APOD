@@ -1,5 +1,5 @@
 <template>
-  <div>{{ apod }}</div>
+  <div>{{ apodDataObj }}</div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
   },
   data() {
     return {
-      apod: this.apodDataObj,
+      // apod: this.apodDataObj,
     }
   }
 }
