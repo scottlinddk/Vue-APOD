@@ -1,4 +1,4 @@
-# vue-templating
+# Vue-APOD
 
 ## Project setup
 ```
