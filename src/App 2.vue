@@ -1,7 +1,6 @@
 <template>
   <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
-  <AppDatepicker />
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
     <!-- 
@@ -19,19 +18,16 @@ import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
 import AppPhoto from './components/AppPhoto.vue'
-import AppDatepicker from './components/AppDatepicker.vue'
-
 
 export default {
   name: 'App',
   components: {
     AppVideo,
     AppPhoto,
-    AppDatepicker
   },
   data() {
     return {
-      apod: null,
+      apod: {},
       api: 'https://api.nasa.gov/planetary/apod?api_key=',
       key: process.env.VUE_APP_API_KEY,
       errors: [],
@@ -40,17 +36,12 @@ export default {
   },
   async mounted () {
     try {
-      const response = await axios.get(this.api + this.key)
+      const response = await axios.get('https://api.nasa.gov/planetary/apod?api_key=' + this.key)
       this.apod = response.data
       this.mediaType = response.data.media_type
       console.log(this.apod.media_type)
     } catch (e) {
       this.errors.push(e)
-    }
-  },
-  methods: {
-    selectDate() {
-      console.log(this.date)
     }
   }
 }
@@ -65,9 +56,4 @@ export default {
   color: #2c3e50;
   margin: 1em;
 }
-
-  .wrapper {
-    max-width: 250px;
-    margin: 0 auto;
-  }
 </style>
