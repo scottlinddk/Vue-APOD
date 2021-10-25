@@ -2,6 +2,7 @@
   <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
   <!-- <AppDatepicker /> -->
+  {{apod}}
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
     <!-- 
@@ -38,12 +39,11 @@ export default {
       mediaType: null,
     }
   },
-  async mounted () {
+  async created() {
     try {
       const response = await axios.get(this.api + this.key)
       this.apod = response.data
-      this.mediaType = response.data.media_type
-      console.log(this.apod.media_type)
+      this.mediaType = this.apod.media_type
     } catch (e) {
       this.errors.push(e)
     }
