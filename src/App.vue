@@ -1,26 +1,25 @@
 <template>
   <AppVideo v-if="dataReady && mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="dataReady && mediaType == 'image'" :apod-data-obj="apod" />
-  <!-- <AppDatepicker /> -->
+  <!-- <DatePicker v-if="selectDate(date)" v-model="date" mode="date" :model-config="modelConfig" :available-dates='{ start: new Date(1995, 6, 16), end: null }'/> -->
+      <DatePicker
+      v-if="selectDate(date)"
+      v-model="date"
+      mode="date"
+      :model-config="modelConfig"
+      :available-dates="{ start: new Date(1995, 6, 16), end: null }"
+    />
   {{apod}}
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
 </template>
-    <!-- 
-      !! REMEMBER .ENV 😊
-      1. Use fetch or AXIOS to fetch NASA API
-      2. Check format 
-      3. Check 'media type' from the API
-      4. Render either Photo.vue or Video.vue depending on the media type
-      5. Error handling
-      6. Get yesterdays APOD (maybe) 
-    
-     -->
 <script>
 import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
 import AppPhoto from './components/AppPhoto.vue'
-// import AppDatepicker from './components/AppDatepicker.vue'
+// import AppDatePicker from './components/AppDatePicker.vue'
+// import AppDatePicker from './components/AppDatePicker.vue';
+import { DatePicker } from 'v-calendar';
 
 
 export default {
@@ -28,7 +27,8 @@ export default {
   components: {
     AppVideo,
     AppPhoto,
-    // AppDatepicker
+    // AppDatePicker,
+    DatePicker
   },
   data() {
     return {
@@ -38,6 +38,13 @@ export default {
       key: process.env.VUE_APP_API_KEY,
       errors: [],
       mediaType: null,
+      showDatePicker: false,
+      date: new Date(),
+      selectedDate: null,
+      modelConfig: {
+        type: 'string',
+        mask: 'YYYY-MM-DD', // Uses 'iso' if missing
+      },
     }
   },
   async created() {
@@ -51,8 +58,14 @@ export default {
     }
   },
   methods: {
-    selectDate() {
-      console.log(this.date)
+    async selectDate() {
+        const response = await axios.get(this.api + this.key + '&date=' + this.date)
+        this.apod = await response.data
+        this.mediaType = this.apod.media_type
+        this.dataReady = true
+    },
+    togglePicker() {
+      this.showDatePicker = !this.showDatePicker;
     }
   }
 }

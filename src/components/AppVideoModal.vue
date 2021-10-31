@@ -111,7 +111,7 @@
 
 <script>
 export default {
-  name: "AppModal",
+  name: "AppVideoModal",
   props: {
     apodDataObj: {
       type: Object,
@@ -119,7 +119,6 @@ export default {
   },
   data() {
     return {
-      apod: this.apodDataObj,
       showModal: false,
     };
   },
