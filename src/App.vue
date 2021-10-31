@@ -1,7 +1,7 @@
 <template>
   <AppVideo v-if="dataReady && mediaType == 'video'" :apod-data-obj="apod" />
   <AppPhoto v-if="dataReady && mediaType == 'image'" :apod-data-obj="apod" />
-  <!-- <DatePicker v-if="selectDate(date)" v-model="date" mode="date" :model-config="modelConfig" :available-dates='{ start: new Date(1995, 6, 16), end: null }'/> -->
+  <h2 class="mb-4">Pick another day:</h2>
       <DatePicker
       v-if="selectDate(date)"
       v-model="date"
@@ -9,16 +9,13 @@
       :model-config="modelConfig"
       :available-dates="{ start: new Date(1995, 6, 16), end: null }"
     />
-  {{apod}}
-  <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
+  <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try to reload the page.</div>
 </template>
 <script>
 import axios from 'axios';
 
 import AppVideo from './components/AppVideo.vue'
 import AppPhoto from './components/AppPhoto.vue'
-// import AppDatePicker from './components/AppDatePicker.vue'
-// import AppDatePicker from './components/AppDatePicker.vue';
 import { DatePicker } from 'v-calendar';
 
 
@@ -27,7 +24,6 @@ export default {
   components: {
     AppVideo,
     AppPhoto,
-    // AppDatePicker,
     DatePicker
   },
   data() {
@@ -43,7 +39,7 @@ export default {
       selectedDate: null,
       modelConfig: {
         type: 'string',
-        mask: 'YYYY-MM-DD', // Uses 'iso' if missing
+        mask: 'YYYY-MM-DD',
       },
     }
   },
@@ -80,9 +76,4 @@ export default {
   color: #2c3e50;
   margin: 1em;
 }
-
-  .wrapper {
-    max-width: 250px;
-    margin: 0 auto;
-  }
 </style>
