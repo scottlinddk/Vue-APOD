@@ -1,6 +1,6 @@
 <template>
-  <AppVideo v-if="mediaType == 'video'" :apod-data-obj="apod" />
-  <AppPhoto v-if="mediaType == 'image'" :apod-data-obj="apod" />
+  <AppVideo v-if="dataReady && mediaType == 'video'" :apod-data-obj="apod" />
+  <AppPhoto v-if="dataReady && mediaType == 'image'" :apod-data-obj="apod" />
   <!-- <AppDatepicker /> -->
   {{apod}}
   <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try and reload the page.</div>
@@ -32,6 +32,7 @@ export default {
   },
   data() {
     return {
+      dataReady: false,
       apod: null,
       api: 'https://api.nasa.gov/planetary/apod?api_key=',
       key: process.env.VUE_APP_API_KEY,
@@ -44,6 +45,7 @@ export default {
       const response = await axios.get(this.api + this.key)
       this.apod = response.data
       this.mediaType = this.apod.media_type
+      this.dataReady = true
     } catch (e) {
       this.errors.push(e)
     }

@@ -17,7 +17,7 @@
           </div>
           <!--body-->
           <div class="relative p-6 flex-auto">
-            <img :alt="apod.title" :src="apod.hdurl">
+            <img :alt="apodDataObj.title" :src="apodDataObj.hdurl">
           </div>
         </div>
       </div>
@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-        apod: this.apodDataObj,
         showModal: false,
     }
   },
