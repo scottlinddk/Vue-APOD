@@ -9,7 +9,12 @@
       :model-config="modelConfig"
       :available-dates="{ start: new Date(1995, 6, 16), end: null }"
     />
-  <div v-if="errors > 0" class="text-red">Something went wrong 😔 Try to reload the page.</div>
+  <div v-if="errors > 0" class="text-red">
+    <p>
+    Something went wrong 😔 Try to reload the page.
+    </p>
+    {{errors}}
+  </div>
 </template>
 <script>
 import axios from 'axios';
